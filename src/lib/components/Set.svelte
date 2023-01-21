@@ -13,7 +13,7 @@
   const fullDeck: CardObj[] = [];
   shapes.forEach((shape: Shape) => {
     return colors.forEach((color: Color) => {
-      return backgrounds.map((bg: Background) => {
+      return backgrounds.forEach((bg: Background) => {
         return fullDeck.push({
           selected: false,
           shape: shape,
@@ -23,11 +23,25 @@
       })
     })
   });
+  let deck: CardObj[] = [];
+  let board: CardObj[] = [];
+  let selection: CardObj[] = [];
 
-  const testDeck: CardObj[] = fullDeck.slice(0, 9);
+  const drawCard = () => {
+    const newCardIndex: number = Math.floor(Math.random() * deck.length);
+    board.push(deck.splice(newCardIndex, 1)[0]);
+  }
+  const newDeal = () => {
+    deck = [...fullDeck];
+    board = [];
+    for (let i = 0; i < 9; i++) {
+      drawCard();
+    }
+  };
 
+  newDeal();
 </script>
 
 <Board
-  cards={testDeck}
+  cards={board}
 />
