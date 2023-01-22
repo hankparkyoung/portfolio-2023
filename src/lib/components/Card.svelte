@@ -1,14 +1,21 @@
 <script lang='ts'>
   import type { CardObj } from '../../types/card.type';
   export let card: CardObj;
+
+  export let selected: boolean = false;
+
 </script>
 
-<button class={`card card--${card.bg}`}>
-  <div class={'overlay'} />
+<button class={`
+  card
+  card--${card.bg}
+`}>
+  {#if selected}
+    <div class={'selected'} />
+  {/if}
   <div class={`
-    shape
-    shape--${card.shape}
-    shape--${card.selected ? card.color : `${card.color}--selected`}
+    ${card.shape}
+    ${card.color}
   `}/>
 </button>
 
@@ -18,13 +25,21 @@
     border: none;
   }
 
+  .selected {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    backdrop-filter: blur(4px) saturate(50%);
+    border-radius: 8px;
+  }
+
   .card {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 120px;
     height: 120px;
-    margin: 8px;
+    margin: 12px;
     border-radius: 8px;
     &--black {
       background-color: #363636;
@@ -46,39 +61,30 @@
     }
   }
 
-  .shape {
+  .square {
+    width: 52px;
+    height: 52px;
+    border-radius: 8px;
+  }
+  .circle {
     width: 60px;
     height: 60px;
-    &--purple {
-      background-color: #BF5DFF;
-      &--selected {
-        background-color: #BF5DFF; // change this
-      }
-    }
-    &--green {
-      background-color: #35D062;
-      &--selected {
-        background-color: #35D062; // change this
-      }
-    }
-    &--orange {
-      background-color: #F9BB4A;
-      &--selected {
-        background-color: #F9BB4A; // change this
-      }
-    }
-    &--square {
-      width: 52px;
-      height: 52px;
-      border-radius: 8px;
-    }
-    &--circle {
-      border-radius: 30px;
-    }
-    &--line {
-      border-radius: 8px;
-      width: 20px;
-    }
+    border-radius: 30px;
+  }
+  .line {
+    width: 20px;
+    height: 60px;
+    border-radius: 8px;
+  }
+
+  .purple {
+    background-color: #BF5DFF;
+  }
+  .green {
+    background-color: #35D062;
+  }
+  .orange {
+    background-color: #F9BB4A;
   }
 
 </style>

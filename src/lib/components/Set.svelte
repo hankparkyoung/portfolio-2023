@@ -15,7 +15,6 @@
     return colors.forEach((color: Color) => {
       return backgrounds.forEach((bg: Background) => {
         return fullDeck.push({
-          selected: false,
           shape: shape,
           color: color,
           bg: bg,
