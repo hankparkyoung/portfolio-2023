@@ -51,9 +51,27 @@
   };
 
   newDeal();
+
+  const checkSet = (cards: CardObj[]) => {
+    const colors: Set<Color> = new Set(cards.map((c: CardObj) => c.color));
+    const shapes: Set<Shape> = new Set(cards.map((c: CardObj) => c.shape));
+    const backgrounds: Set<Background> = new Set(cards.map((c: CardObj) => c.bg));
+
+    if (
+      (colors.size === 1 || colors.size === 3) &&
+      (shapes.size === 1 || shapes.size === 3) &&
+      (backgrounds.size === 1 || backgrounds.size === 3)
+    ) {
+      return true;
+    }
+    return false;
+  };
+
 </script>
 
 <Board
   cards={board}
   onClick={(e) => selectCard(e)}
 />
+
+<button on:click={() => console.log(checkSet(selection))}>Set Check</button>
