@@ -30,12 +30,24 @@
     const newCardIndex: number = Math.floor(Math.random() * deck.length);
     board.push(deck.splice(newCardIndex, 1)[0]);
   }
+
   const newDeal = () => {
     deck = [...fullDeck];
     board = [];
     for (let i = 0; i < 9; i++) {
       drawCard();
     }
+  }
+
+  const selectCard = (card: CardObj) => {
+    const index = selection.indexOf(card);
+    if (index === -1) {
+      selection.push(card);
+    } else {
+      selection.splice(index, 1);
+    }
+
+    console.log(selection);
   };
 
   newDeal();
@@ -43,4 +55,5 @@
 
 <Board
   cards={board}
+  onClick={(e) => selectCard(e)}
 />

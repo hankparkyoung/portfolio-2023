@@ -3,13 +3,20 @@
   export let card: CardObj;
 
   export let selected: boolean = false;
+  export let onClick: (card: CardObj) => void;
 
 </script>
 
-<button class={`
-  card
-  card--${card.bg}
-`}>
+<button
+  class={`
+    card
+    card--${card.bg}
+  `}
+  on:click={() => {
+    selected = !selected;
+    onClick(card);
+  }}
+>
   {#if selected}
     <div class={'selected'} />
   {/if}
@@ -29,7 +36,7 @@
     position: absolute;
     width: 120px;
     height: 120px;
-    backdrop-filter: blur(4px) saturate(50%);
+    backdrop-filter: brightness(30%);
     border-radius: 8px;
   }
 

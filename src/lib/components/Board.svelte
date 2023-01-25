@@ -2,6 +2,7 @@
   import type { CardObj } from '../../types/card.type';
   import Card from './Card.svelte';
   export let cards: CardObj[];
+  export let onClick: (card: CardObj) => void;
 
   const row1: CardObj[] = cards.slice(0, 3);
   const row2: CardObj[] = cards.slice(3, 6);
@@ -12,6 +13,7 @@
   {#each row1 as card}
     <Card
       card={card}
+      onClick={onClick}
     />
   {/each}
 </div>
@@ -19,6 +21,7 @@
 {#each row2 as card}
   <Card
     card={card}
+    onClick={onClick}
   />
 {/each}
 </div>
@@ -26,6 +29,7 @@
 {#each row3 as card}
   <Card
     card={card}
+    onClick={onClick}
   />
 {/each}
 </div>
