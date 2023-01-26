@@ -4,9 +4,12 @@
   export let cards: CardObj[];
   export let onClick: (card: CardObj) => void;
 
-  const row1: CardObj[] = cards.slice(0, 3);
-  const row2: CardObj[] = cards.slice(3, 6);
-  const row3: CardObj[] = cards.slice(6, 9); 
+  let row1: CardObj[];
+  $: row1 = cards.slice(0, 3);
+  let row2: CardObj[];
+  $: row2 = cards.slice(3, 6);
+  let row3: CardObj[];
+  $: row3 = cards.slice(6, 9); 
 </script>
 
 <div class={'row'}>

@@ -10,6 +10,9 @@
 
   import Board from './Board.svelte';
 
+  let score: number = 0;
+  let message: string = 'Good luck!';
+
   const fullDeck: CardObj[] = [];
   shapes.forEach((shape: Shape) => {
     return colors.forEach((color: Color) => {
@@ -34,9 +37,12 @@
   const newDeal = () => {
     deck = [...fullDeck];
     board = [];
+    selection = [];
     for (let i = 0; i < 9; i++) {
       drawCard();
     }
+    score = 0;
+    message = 'Good luck!';
   }
 
   const selectCard = (card: CardObj) => {
@@ -53,6 +59,10 @@
   newDeal();
 
   const checkSet = (cards: CardObj[]) => {
+    if (cards.length !== 3) {
+      message = 'You must select exactly 3 cards!';
+      return false;
+    }
     const colors: Set<Color> = new Set(cards.map((c: CardObj) => c.color));
     const shapes: Set<Shape> = new Set(cards.map((c: CardObj) => c.shape));
     const backgrounds: Set<Background> = new Set(cards.map((c: CardObj) => c.bg));
@@ -62,8 +72,12 @@
       (shapes.size === 1 || shapes.size === 3) &&
       (backgrounds.size === 1 || backgrounds.size === 3)
     ) {
+      score += 1;
+      message = 'Set!';
       return true;
     }
+    score -= 1;
+    message = 'Incorrect!';
     return false;
   };
 
@@ -73,5 +87,8 @@
   cards={board}
   onClick={(e) => selectCard(e)}
 />
+<p>{score}</p>
+<p>{message}</p>
 
 <button on:click={() => console.log(checkSet(selection))}>Set Check</button>
+<button on:click={newDeal}>Reset</button>
