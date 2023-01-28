@@ -18,6 +18,7 @@
     return colors.forEach((color: Color) => {
       return backgrounds.forEach((bg: Background) => {
         return fullDeck.push({
+          selected: false,
           shape: shape,
           color: color,
           bg: bg,
@@ -36,6 +37,7 @@
 
   const newDeal = () => {
     deck = [...fullDeck];
+    deck.forEach((c: CardObj) => c.selected = false);
     board = [];
     selection = [];
     for (let i = 0; i < 9; i++) {
@@ -52,6 +54,8 @@
     } else {
       selection.splice(index, 1);
     }
+
+    card.selected = !card.selected;
 
     console.log(selection);
   };

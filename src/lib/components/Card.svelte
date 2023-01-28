@@ -2,7 +2,6 @@
   import type { CardObj } from '../../types/card.type';
   export let card: CardObj;
 
-  export let selected: boolean = false;
   export let onClick: (card: CardObj) => void;
 
 </script>
@@ -13,11 +12,11 @@
     card--${card.bg}
   `}
   on:click={() => {
-    selected = !selected;
     onClick(card);
+    card.selected = card.selected;
   }}
 >
-  {#if selected}
+  {#if card.selected}
     <div class={'selected'} />
   {/if}
   <div class={`
